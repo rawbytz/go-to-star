@@ -1,5 +1,5 @@
 ## WorkFlowy Go To Starred Page
-- Replaces WorkFlowy's starred pages picker. *(Alt+S)*
+- Adds a new way to access WorkFlowy's starred pages with *(Alt+S)*
 - Open starred pages faster using just the keyboard. 
 - Omits completed starred items.
 - Type the first letter(s) of the starred page to select it. Then press *Enter* to launch.
