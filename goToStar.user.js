@@ -44,7 +44,8 @@
         if (theme === "hacker") return "background: rgb(0, 0, 0);color: rgb(0, 255, 0);"
         return ""
       }
-      const theme = JSON.parse(localStorage.getItem('userstorage.settings')).theme;
+      const settings = JSON.parse(localStorage.getItem('userstorage.settings'));
+      const theme = settings ? settings.theme : undefined;
       const options = stars.map(star => `<option value="${getStarredURL(star)}">${htmlEscText(getStarName(star))}</option>`);
       const l = options.length;
       const style = `<style>select{font-size:${getFontSize(l)}px;border:hidden;margin-top:6px;width:460px;${darkStyle(theme)}}select::-webkit-scrollbar{display:none!important}option::before{content:"●  "!important;color:#c6c6c6!important}h1{font-size:120%!important}</style>`;
