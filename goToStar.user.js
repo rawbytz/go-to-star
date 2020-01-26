@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WorkFlowy Go To Starred Page
 // @namespace    https://rawbytz.wordpress.com
-// @version      2.9
+// @version      3.0
 // @description  Option to WorkFlowy's Starred pages picker. Activate with ALT+S.
 // @author       rawbytz
 // @match        https://workflowy.com/*
@@ -29,6 +29,7 @@
       const query = star.search ? ` ⌕ ${star.search}` : ""; // 🔍
       return name + query
     }
+    const htmlEscText = str => str.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
     function createSelectBox_Star(stars) {
       function getFontSize(num) {
         if (num < 44) return 14;
@@ -44,7 +45,7 @@
         return ""
       }
       const theme = JSON.parse(localStorage.getItem('userstorage.settings')).theme;
-      const options = stars.map(star => `<option value="${getStarredURL(star)}">${htmlEscapeText(getStarName(star))}</option>`);
+      const options = stars.map(star => `<option value="${getStarredURL(star)}">${htmlEscText(getStarName(star))}</option>`);
       const l = options.length;
       const style = `<style>select{font-size:${getFontSize(l)}px;border:hidden;margin-top:6px;width:460px;${darkStyle(theme)}}select::-webkit-scrollbar{display:none!important}option::before{content:"●  "!important;color:#c6c6c6!important}h1{font-size:120%!important}</style>`;
       return `${style}<select id="starSelect" size="${l}">${options.join('')}</select>`;
