@@ -6,6 +6,7 @@
 - When multiple starred pages start with the same letter, type the first letter again to select the next starred page.
 - [Click here to install](https://github.com/rawbytz/go-to-star/raw/master/goToStar.user.js) into your script manager.
 ### Version Notes
+- v3.0 (2020-01-26): Fixed localStorage parse
 - v2.9 (2019-12-16): Moved from Gist to repo
 - v2.8 (2019-11-15): Added support for dark theme
 - v2.6 (2019-08-26): Automatically goes to single star, error message if no stars.
