@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WorkFlowy Go To Starred Page
 // @namespace    https://rawbytz.wordpress.com
-// @version      3.1
+// @version      3.2
 // @description  Option to WorkFlowy's Starred pages picker. Activate with ALT+S.
 // @author       rawbytz
 // @match        https://workflowy.com/*
@@ -46,7 +46,7 @@
       const options = stars.map(star => `<option class="selectOpt" value="${getStarredURL(star)}">${htmlEscText(getStarName(star))}</option>`);
       const l = options.length;
       const style = `<style>#selectBox{font-size:${getFontSize(l)}px;border:hidden;margin-top:6px;width:460px;${getColors()}}#selectBox::-webkit-scrollbar{display:none!important}.selectOpt::before{content:"●  "!important;color:#c6c6c6!important}h1{font-size:120%!important}</style>`;
-      return `${style}<select id="starSelect" size="${l}">${options.join('')}</select>`;
+      return `${style}<select id="selectBox" size="${l}">${options.join('')}</select>`;
     }
     function goAndHide(url) {
       location.href = url;
@@ -57,11 +57,11 @@
     if (stars.length === 1) return void WF.zoomTo(stars[0].item);
     WF.showAlertDialog(createSelectBox_Star(stars));
     setTimeout(function () {
-      const starSelect = document.getElementById("starSelect");
-      starSelect.selectedIndex = '0';
-      starSelect.focus();
-      starSelect.onclick = function () { goAndHide(this.value) };
-      starSelect.onkeyup = function (e) { if (e.key === "Enter") goAndHide(this.value) };
+      const selectBox = document.getElementById("selectBox");
+      selectBox.selectedIndex = '0';
+      selectBox.focus();
+      selectBox.onclick = function () { goAndHide(this.value) };
+      selectBox.onkeyup = function (e) { if (e.key === "Enter") goAndHide(this.value) };
     }, 100);
   }
 
