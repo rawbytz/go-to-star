@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WorkFlowy Go To Starred Page
 // @namespace    https://rawbytz.wordpress.com
-// @version      3.0
+// @version      3.1
 // @description  Option to WorkFlowy's Starred pages picker. Activate with ALT+S.
 // @author       rawbytz
 // @match        https://workflowy.com/*
@@ -39,16 +39,13 @@
         else if (num < 61) return 10;
         else return 9;
       }
-      function darkStyle(theme) {
-        if (theme === "dark" || theme === "space") return "background: rgb(42, 49, 53);color: white;"
-        if (theme === "hacker") return "background: rgb(0, 0, 0);color: rgb(0, 255, 0);"
-        return ""
+      function getColors() {
+        const p = document.querySelector(".page.active");
+        return p ? `color:${getComputedStyle(p).color};background:${getComputedStyle(p).backgroundColor};` : "";
       }
-      const settings = JSON.parse(localStorage.getItem('userstorage.settings'));
-      const theme = settings ? settings.theme : undefined;
-      const options = stars.map(star => `<option value="${getStarredURL(star)}">${htmlEscText(getStarName(star))}</option>`);
+      const options = stars.map(star => `<option class="selectOpt" value="${getStarredURL(star)}">${htmlEscText(getStarName(star))}</option>`);
       const l = options.length;
-      const style = `<style>select{font-size:${getFontSize(l)}px;border:hidden;margin-top:6px;width:460px;${darkStyle(theme)}}select::-webkit-scrollbar{display:none!important}option::before{content:"●  "!important;color:#c6c6c6!important}h1{font-size:120%!important}</style>`;
+      const style = `<style>#selectBox{font-size:${getFontSize(l)}px;border:hidden;margin-top:6px;width:460px;${getColors()}}#selectBox::-webkit-scrollbar{display:none!important}.selectOpt::before{content:"●  "!important;color:#c6c6c6!important}h1{font-size:120%!important}</style>`;
       return `${style}<select id="starSelect" size="${l}">${options.join('')}</select>`;
     }
     function goAndHide(url) {
