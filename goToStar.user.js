@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         WorkFlowy Go To Starred Page
 // @namespace    https://rawbytz.wordpress.com
-// @version      3.2
+// @version      3.3
 // @description  Option to WorkFlowy's Starred pages picker. Activate with ALT+S.
 // @author       rawbytz
 // @match        https://workflowy.com/*
-// @match        https://beta.workflowy.com/*
+// @match        https://*.workflowy.com/*
 // @updateUrl    https://github.com/rawbytz/go-to-star/raw/master/goToStar.user.js
 // @downloadUrl  https://github.com/rawbytz/go-to-star/raw/master/goToStar.user.js
 // @grant        none

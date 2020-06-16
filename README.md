@@ -6,6 +6,7 @@
 - When multiple starred pages start with the same letter, type the first letter again to select the next starred page.
 - [Click here to install](https://github.com/rawbytz/go-to-star/raw/master/goToStar.user.js) into your script manager.
 ### Version Notes
+- v3.3 (2020-06-16): Add support for all WorkFlowy domains.
 - v3.2 (2020-01-28): Replaced localStorge method (for coloring selection boxes)
 - v3.0 (2020-01-26): Fixed localStorage parse
 - v2.9 (2019-12-16): Moved from Gist to repo
