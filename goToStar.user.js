@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WorkFlowy Go To Starred Page
 // @namespace    https://rawbytz.wordpress.com
-// @version      3.3
+// @version      3.4
 // @description  Option to WorkFlowy's Starred pages picker. Activate with ALT+S.
 // @author       rawbytz
 // @match        https://workflowy.com/*
@@ -16,8 +16,8 @@
   'use strict';
   function goToStar() {
     function toastMsg(str, sec, err) {
-      WF.showMessage(str, err);
-      setTimeout(WF.hideMessage, (sec || 2) * 1000);
+      WF.showMessage(str, err);
+      setTimeout(WF.hideMessage, (sec || 2) * 1000);
     }
     function getStarredURL(star) {
       const base = star.item.getUrl();
@@ -56,17 +56,20 @@
     if (stars.length === 0) return void toastMsg("No starred pages found.", 3, true);
     if (stars.length === 1) return void WF.zoomTo(stars[0].item);
     WF.showAlertDialog(createSelectBox_Star(stars));
-    setTimeout(function () {
-      const selectBox = document.getElementById("selectBox");
-      selectBox.selectedIndex = '0';
-      selectBox.focus();
-      selectBox.onclick = function () { goAndHide(this.value) };
-      selectBox.onkeyup = function (e) { if (e.key === "Enter") goAndHide(this.value) };
-    }, 100);
+    const intervalId = setInterval(function () {
+      let selectBox = document.getElementById("selectBox");
+      if (selectBox) {
+        clearInterval(intervalId);
+        selectBox.selectedIndex = '0';
+        selectBox.focus();
+        selectBox.onclick = function () { goAndHide(this.value) };
+        selectBox.onkeyup = function (e) { if (e.key === "Enter") goAndHide(this.value) };
+      }
+    }, 50);
   }
 
   document.addEventListener("keydown", function (event) { // Alt+s 
-    if (event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey && event.key === "s") { 
+    if (event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey && event.key === "s") {
       goToStar();
       event.stopImmediatePropagation();
       event.preventDefault();
